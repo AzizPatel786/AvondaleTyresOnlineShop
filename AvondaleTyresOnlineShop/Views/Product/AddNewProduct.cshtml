@@ -1,4 +1,5 @@
-﻿@model ProductModel
+﻿@using AvondaleTyresOnlineShop.Enums
+@model ProductModel
 @{
     ViewData["Item"] = "Add new product";
 }
@@ -16,43 +17,43 @@
         </div>
     }
 
-    <form method="post" asp-action="AddNewProduct" asp-controller="Product">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Item" class="control-label"></label>
-            <input asp-for="Item" class="form-control" />
-            <span asp-validation-for="Item" class="text-danger"></span>
-        </div>
+<form method="post" asp-action="AddNewProduct" asp-controller="Product">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Item" class="control-label"></label>
+        <input asp-for="Item" class="form-control" />
+        <span asp-validation-for="Item" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryEnum" class="control-label"></label>
+        <select asp-for="CategoryEnum" class="form-control" asp-items="Html.GetEnumSelectList<CategoryEnum>()">
+            <option value="">Please select the Category</option>
+        </select>
+        <span asp-validation-for="CategoryEnum" class="text-danger"></span>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Category" class="control-label"></label>
-            <input asp-for="Category" class="form-control" />
-            <span asp-validation-for="Category" class="text-danger"></span>
+    <div class="form-group">
+        <label asp-for="Price" class="control-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
 
-        </div>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Price" class="control-label"></label>
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price" class="text-danger"></span>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
 
-        </div>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Description" class="control-label"></label>
-            <textarea asp-for="Description" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
+    <div class="form-group">
+        <label asp-for="Quantity" class="control-label"></label>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
 
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Quantity" class="control-label"></label>
-            <input asp-for="Quantity" class="form-control" />
-            <span asp-validation-for="Quantity" class="text-danger"></span>
-
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Add product" class="btn btn-primary" />
-        </div>
-    </form>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Add product" class="btn btn-primary" />
+    </div>
+</form>
 </div> 

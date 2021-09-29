@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using AvondaleTyresOnlineShop.Enums;
 
 namespace AvondaleTyresOnlineShop.Models
 {
@@ -14,8 +15,8 @@ namespace AvondaleTyresOnlineShop.Models
         [Required(ErrorMessage = "Please enter the Item Name of the Product (Min 3 Char)")]
         public string Item { get; set; }
 
-        [Required(ErrorMessage = "Please enter the category name")]
-        public string Category { get; set; }
+        [Required(ErrorMessage = "Please select the category name")]
+        public CategoryEnum CategoryEnum { get; set; }
 
         [StringLength(500)]
         public string Description { get; set; }

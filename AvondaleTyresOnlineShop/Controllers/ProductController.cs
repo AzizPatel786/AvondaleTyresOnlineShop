@@ -38,14 +38,14 @@ namespace AvondaleTyresOnlineShop.Controllers
 
         public ViewResult AddNewProduct(bool isSuccess = false, int productId = 0)
         {
-            var model = new ProductModel()
-            {
-                Category = "Brakes"
+            //var model = new ProductModel()
+            //{
+            //    Category = "Brakes"
 
-            };
+            //};
             ViewBag.IsSuccess = isSuccess;
             ViewBag.ProductId = productId;
-            return View(model);
+            return View();
         }
 
         [HttpPost]
