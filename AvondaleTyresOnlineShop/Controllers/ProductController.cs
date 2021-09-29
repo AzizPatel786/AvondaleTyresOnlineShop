@@ -24,6 +24,7 @@ namespace AvondaleTyresOnlineShop.Controllers
             return View(data);
         }
 
+        [Route("product-details/{id}", Name = "productDetailsRoute")]
         public ViewResult GetProduct(int id)
         {
             var data = _productRepository.GetProductById(id);
