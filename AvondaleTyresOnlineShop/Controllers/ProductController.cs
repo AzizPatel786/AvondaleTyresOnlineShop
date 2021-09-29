@@ -21,7 +21,7 @@ namespace AvondaleTyresOnlineShop.Controllers
         {
             var data = _productRepository.GetAllProducts();
 
-            return View();
+            return View(data);
         }
 
         public ProductModel GetProduct(int id)
