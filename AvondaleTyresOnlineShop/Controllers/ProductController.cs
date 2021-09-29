@@ -24,9 +24,11 @@ namespace AvondaleTyresOnlineShop.Controllers
             return View(data);
         }
 
-        public ProductModel GetProduct(int id)
+        public ViewResult GetProduct(int id)
         {
-            return _productRepository.GetProductById(id);
+            var data = _productRepository.GetProductById(id);
+
+            return View(data);
         }
         public List<ProductModel> SearchProducts(string productName, string categoryName)
         {
