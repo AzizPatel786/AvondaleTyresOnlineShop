@@ -35,5 +35,16 @@ namespace AvondaleTyresOnlineShop.Controllers
         {
             return _productRepository.SearchProduct(productName, categoryName);
         }
+
+        public ViewResult AddNewProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult AddNewProduct(ProductModel productModel)
+        {
+            return View();
+        }
     }
 }
