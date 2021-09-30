@@ -11,7 +11,7 @@ namespace AvondaleTyresOnlineShop.Data
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public ICollection<Category> Categoryies { get; set; }
+        public ICollection<Products> Products { get; set; }
 
     }
 }
