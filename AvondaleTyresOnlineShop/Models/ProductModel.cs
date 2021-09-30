@@ -45,5 +45,10 @@ namespace AvondaleTyresOnlineShop.Models
         public IFormFileCollection GalleryFiles { get; set; }
 
         public List<GalleryModel> Gallery { get; set; }
+
+        [Display(Name = "Upload the price chart of this product in pdf format")]
+        [Required]
+        public IFormFile PricechartPdf { get; set; }
+        public string PricechartPdfUrl { get; set; }
     }
 }

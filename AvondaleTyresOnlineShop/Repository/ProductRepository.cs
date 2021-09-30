@@ -29,6 +29,7 @@ namespace AvondaleTyresOnlineShop.Repository
                 Quantity = model.Quantity.HasValue ? model.Quantity.Value : 0,
                 UpdatedOn = DateTime.UtcNow,
                 CoverImageUrl = model.CoverImageUrl,
+                PricechartPdfUrl = model.PricechartPdfUrl
 
             };
             newProduct.productGallery = new List<ProductGallery>();
@@ -84,7 +85,8 @@ namespace AvondaleTyresOnlineShop.Repository
                          Id = g.Id,
                          Name = g.Name,
                          URL = g.URL
-                     }).ToList()
+                     }).ToList(),
+                     PricechartPdfUrl = product.PricechartPdfUrl
                  }).FirstOrDefaultAsync();
         }
 

@@ -20,6 +20,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\product\gallery\" />
+    <Folder Include="wwwroot\images\product\cover\" />
+    <Folder Include="wwwroot\images\product\pdf\" />
+    <Folder Include="wwwroot\Products\cover\" />
+    <Folder Include="wwwroot\Products\gallery\" />
+    <Folder Include="wwwroot\Products\pdf\" />
   </ItemGroup>
 
 </Project>

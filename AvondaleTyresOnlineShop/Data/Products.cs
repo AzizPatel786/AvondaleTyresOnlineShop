@@ -21,5 +21,6 @@ namespace AvondaleTyresOnlineShop.Data
 
         public ICollection<ProductGallery> productGallery { get; set; }
         public string CoverImageUrl { get; set; }
+        public string PricechartPdfUrl { get; set; }
     }
 }

@@ -67,12 +67,14 @@ namespace AvondaleTyresOnlineShop.Controllers
             {
                 if (productModel.CoverPhoto != null)
                 {
-                    string folder = "product/cover/";
+                    string folder = "products/cover/";
                     productModel.CoverImageUrl = await UploadImage(folder, productModel.CoverPhoto);
                 }
+
                 if (productModel.GalleryFiles != null)
                 {
-                    string folder = "books/gallery/";
+                    string folder = "products/gallery/";
+
                     productModel.Gallery = new List<GalleryModel>();
 
                     foreach (var file in productModel.GalleryFiles)
@@ -86,15 +88,20 @@ namespace AvondaleTyresOnlineShop.Controllers
                     }
                 }
 
+                if (productModel.PricechartPdf != null)
+                {
+                    string folder = "products/pdf/";
+                    productModel.PricechartPdfUrl = await UploadImage(folder, productModel.PricechartPdf);
+                }
+
+              
+
                 int id = await _productRepository.AddNewProduct(productModel);
                 if (id > 0)
                 {
                     return RedirectToAction(nameof(AddNewProduct), new { isSuccess = true, productId = id });
                 }
             }
-
-            ViewBag.Language = new SelectList(await _categoryRepository.GetCategories(), "Id", "Name");
-
 
             return View();
         }

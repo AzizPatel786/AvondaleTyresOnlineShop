@@ -37,6 +37,32 @@ namespace AvondaleTyresOnlineShop.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("AvondaleTyresOnlineShop.Data.ProductGallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("URL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("ProductGallery");
+                });
+
             modelBuilder.Entity("AvondaleTyresOnlineShop.Data.Products", b =>
                 {
                     b.Property<int>("Id")
@@ -46,6 +72,9 @@ namespace AvondaleTyresOnlineShop.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CoverImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -72,6 +101,15 @@ namespace AvondaleTyresOnlineShop.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("AvondaleTyresOnlineShop.Data.ProductGallery", b =>
+                {
+                    b.HasOne("AvondaleTyresOnlineShop.Data.Products", "Products")
+                        .WithMany("productGallery")
+                        .HasForeignKey("ProductsId");
+
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("AvondaleTyresOnlineShop.Data.Products", b =>
                 {
                     b.HasOne("AvondaleTyresOnlineShop.Data.CategoryModel", "Category")
@@ -81,6 +119,11 @@ namespace AvondaleTyresOnlineShop.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("AvondaleTyresOnlineShop.Data.Products", b =>
+                {
+                    b.Navigation("productGallery");
                 });
 #pragma warning restore 612, 618
         }
