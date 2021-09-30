@@ -20,3 +20,4 @@ namespace AvondaleTyresOnlineShop.Enums
         Lights =  5
     }
 }
+
