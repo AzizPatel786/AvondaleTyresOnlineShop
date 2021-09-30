@@ -15,6 +15,7 @@ namespace AvondaleTyresOnlineShop.Data
         }
 
         public DbSet<Products> Products { get; set; }
+        public DbSet<ProductGallery> ProductGallery { get; set; }
         public DbSet<CategoryModel> Category { get; set; }
 
     }

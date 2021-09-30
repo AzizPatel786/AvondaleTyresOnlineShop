@@ -7,6 +7,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using AvondaleTyresOnlineShop.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using AvondaleTyresOnlineShop.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace AvondaleTyresOnlineShop.Controllers
 {
@@ -14,11 +18,15 @@ namespace AvondaleTyresOnlineShop.Controllers
     {
         private readonly ProductRepository _productRepository = null;
         private readonly CategoryRepository _categoryRepository = null;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository)
+        public ProductController(ProductRepository productRepository,
+            CategoryRepository categoryRepository,
+            IWebHostEnvironment webHostEnvironment)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<ViewResult> GetAllProducts()
@@ -57,6 +65,27 @@ namespace AvondaleTyresOnlineShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (productModel.CoverPhoto != null)
+                {
+                    string folder = "product/cover/";
+                    productModel.CoverImageUrl = await UploadImage(folder, productModel.CoverPhoto);
+                }
+                if (productModel.GalleryFiles != null)
+                {
+                    string folder = "books/gallery/";
+                    productModel.Gallery = new List<GalleryModel>();
+
+                    foreach (var file in productModel.GalleryFiles)
+                    {
+                        var gallery = new GalleryModel()
+                        {
+                            Name = file.FileName,
+                            URL = await UploadImage(folder, file)
+                        };
+                        productModel.Gallery.Add(gallery);
+                    }
+                }
+
                 int id = await _productRepository.AddNewProduct(productModel);
                 if (id > 0)
                 {
@@ -68,6 +97,18 @@ namespace AvondaleTyresOnlineShop.Controllers
 
 
             return View();
+        }
+
+        private async Task<string> UploadImage(string folderPath, IFormFile file)
+        {
+
+            folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;
+
+            string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderPath);
+
+            await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+            return "/" + folderPath;
         }
     }
 }

@@ -25,8 +25,8 @@
         <span asp-validation-for="Item" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="CategoryEnum" class="control-label"></label>
-        <select asp-for="CategoryEnum" class="form-control" asp-items="Html.GetEnumSelectList<CategoryEnum>()">
+        <label asp-for="CategoryId" class="control-label"></label>
+        <select asp-for="CategoryId" class="form-control" asp-items="Html.GetEnumSelectList<CategoryEnum>()">
             <option value="">Please select the Category</option>
         </select>
         <span asp-validation-for="CategoryEnum" class="text-danger"></span>
@@ -52,6 +52,23 @@
         <span asp-validation-for="Quantity" class="text-danger"></span>
 
     </div>
+    <div class="form-group">
+        <label asp-for="CoverPhoto" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="CoverPhoto" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GalleryFiles" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+    </div>
+
     <div class="form-group">
         <input type="submit" value="Add product" class="btn btn-primary" />
     </div>

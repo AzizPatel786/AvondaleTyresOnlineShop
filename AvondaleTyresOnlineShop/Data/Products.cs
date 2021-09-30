@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,5 +18,8 @@ namespace AvondaleTyresOnlineShop.Data
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public CategoryModel Category { get; set; }
+
+        public ICollection<ProductGallery> productGallery { get; set; }
+        public string CoverImageUrl { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using AvondaleTyresOnlineShop.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace AvondaleTyresOnlineShop.Models
 {
@@ -22,7 +23,10 @@ namespace AvondaleTyresOnlineShop.Models
         public CategoryEnum CategoryEnum { get; set; }
         public string Category { get; set; }
 
-
+        [Display(Name = "Choose the cover photo of your item")]
+        [Required]
+        public IFormFile CoverPhoto { get; set; }
+        public string CoverImageUrl { get; set; }
 
 
 
@@ -35,5 +39,11 @@ namespace AvondaleTyresOnlineShop.Models
         [Required(ErrorMessage = "Please enter the total quantity left")]
         [Display(Name = "Total amount left")]
         public int? Quantity { get; set; }
+
+        [Display(Name = "Choose the gallery images of your product")]
+        [Required]
+        public IFormFileCollection GalleryFiles { get; set; }
+
+        public List<GalleryModel> Gallery { get; set; }
     }
 }

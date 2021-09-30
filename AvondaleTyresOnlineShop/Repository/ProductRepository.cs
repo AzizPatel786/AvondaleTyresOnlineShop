@@ -27,9 +27,20 @@ namespace AvondaleTyresOnlineShop.Repository
                 Description = model.Description,
                 Item = model.Item,
                 Quantity = model.Quantity.HasValue ? model.Quantity.Value : 0,
-                UpdatedOn = DateTime.UtcNow
+                UpdatedOn = DateTime.UtcNow,
+                CoverImageUrl = model.CoverImageUrl,
 
             };
+            newProduct.productGallery = new List<ProductGallery>();
+
+            foreach (var file in model.Gallery)
+            {
+                newProduct.productGallery.Add(new ProductGallery()
+                {
+                    Name = file.Name,
+                    URL = file.URL
+                });
+            }
 
             await _context.Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
@@ -49,8 +60,9 @@ namespace AvondaleTyresOnlineShop.Repository
                         Id = product.Id,
                         Item = product.Item,
                         Price = product.Price,
-                        Quantity = product.Quantity
-                    }).ToListAsync();
+                        Quantity = product.Quantity,
+                        CoverImageUrl = product.CoverImageUrl
+                  }).ToListAsync();
         }
 
         public async Task<ProductModel> GetProductById(int id)
@@ -64,7 +76,15 @@ namespace AvondaleTyresOnlineShop.Repository
                     Id = product.Id,
                     Item = product.Item,
                     Price = product.Price,
-                    Quantity = product.Quantity
+                    Quantity = product.Quantity,
+                     CoverImageUrl = product.CoverImageUrl,
+
+                     Gallery = product.productGallery.Select(g => new GalleryModel()
+                     {
+                         Id = g.Id,
+                         Name = g.Name,
+                         URL = g.URL
+                     }).ToList()
                  }).FirstOrDefaultAsync();
         }
 
