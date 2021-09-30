@@ -15,8 +15,16 @@ namespace AvondaleTyresOnlineShop.Models
         [Required(ErrorMessage = "Please enter the Item Name of the Product (Min 3 Char)")]
         public string Item { get; set; }
 
+
+        public int CategoryId { get; set; }
+
         [Required(ErrorMessage = "Please select the category name")]
         public CategoryEnum CategoryEnum { get; set; }
+        public string Category { get; set; }
+
+
+
+
 
         [StringLength(500)]
         public string Description { get; set; }

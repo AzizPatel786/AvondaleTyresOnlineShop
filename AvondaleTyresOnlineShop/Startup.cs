@@ -28,6 +28,7 @@ namespace AvondaleTyresOnlineShop
         {
             services.AddControllersWithViews();
             services.AddScoped<ProductRepository, ProductRepository>();
+            services.AddScoped<CategoryRepository, CategoryRepository>();
 
             services.AddDbContext<ProductStoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AvondaleTyresOnlineShop.Data;
 using AvondaleTyresOnlineShop.Models;
 using Microsoft.EntityFrameworkCore;
+using AvondaleTyresOnlineShop.Enums;
 
 namespace AvondaleTyresOnlineShop.Repository
 {
@@ -21,7 +22,7 @@ namespace AvondaleTyresOnlineShop.Repository
         {
             var newProduct = new Products()
             {
-                Category = model.Category,
+                CategoryId = model.CategoryId,
                 CreatedOn = DateTime.UtcNow,
                 Description = model.Description,
                 Item = model.Item,
@@ -39,62 +40,37 @@ namespace AvondaleTyresOnlineShop.Repository
 
         public async Task<List<ProductModel>> GetAllProducts()
         {
-            var products = new List<ProductModel>();
-            var allproducts = await _context.Products.ToListAsync();
-            if (allproducts?.Any() == true)
-            {
-                foreach (var product in allproducts)
-                {
-                    products.Add(new ProductModel()
-                    {
-                        Category = product.Category,
+            return await _context.Products
+                  .Select(product => new ProductModel()
+                  {
+                      CategoryId = product.CategoryId,
+                        Category = product.Category.Name,
                         Description = product.Description,
                         Id = product.Id,
                         Item = product.Item,
                         Price = product.Price,
                         Quantity = product.Quantity
-                    });
-                }
-            }
-            return products;
+                    }).ToListAsync();
         }
 
         public async Task<ProductModel> GetProductById(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
-            {
-                var bookDetails = new ProductModel()
-                {
-                    Category = product.Category,
+            return await _context.Products.Where(x => x.Id == id)
+                 .Select(product => new ProductModel()
+                 {
+                     CategoryId = product.CategoryId,
+                    Category = product.Category.Name,
                     Description = product.Description,
                     Id = product.Id,
                     Item = product.Item,
                     Price = product.Price,
                     Quantity = product.Quantity
-                };
+                 }).FirstOrDefaultAsync();
+        }
 
-                return bookDetails;
-            }
-
+        public List<ProductModel> SearchBook(string item, string categoryName)
+        {
             return null;
-        }
-
-        public List<ProductModel> SearchProduct(string title, string authorName)
-        {
-            return DataSource().Where(x => x.Item.Contains(title) || x.Category.Contains(authorName)).ToList();
-        }
-
-        private List<ProductModel> DataSource()
-        {
-            return new List<ProductModel>()
-            {
-               new ProductModel(){Id =1, Item="MVC", Category = "Nitish", Description="This is the description for MVC book", Price=1234, Quantity=3 },
-                new ProductModel(){Id =2, Item="Dot Net Core", Category = "Nitish", Description="This is the description for MVC book", Price=12345, Quantity=3 },
-                new ProductModel(){Id =3, Item="C#", Category = "Monika", Description="This is the description for MVC book", Price=12345, Quantity=3 },
-                new ProductModel(){Id =4, Item="Java", Category = "Webgentle", Description="This is the description for MVC book", Price=12345, Quantity=3 },
-                new ProductModel(){Id =5, Item="Php", Category = "Webgentle", Description="This is the description for MVC book", Price=12345, Quantity=3 },
- };
         }
     }
 }

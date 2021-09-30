@@ -5,16 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AvondaleTyresOnlineShop.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AvondaleTyresOnlineShop.Controllers
 {
     public class ProductController : Controller
     {
         private readonly ProductRepository _productRepository = null;
+        private readonly CategoryRepository _categoryRepository = null;
 
-        public ProductController(ProductRepository productRepository)
+        public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<ViewResult> GetAllProducts()
@@ -31,22 +35,22 @@ namespace AvondaleTyresOnlineShop.Controllers
 
             return View(data);
         }
-        public List<ProductModel> SearchProducts(string productName, string categoryName)
+        public List<ProductModel> SearchBooks(string productName, string categoryName)
         {
-            return _productRepository.SearchProduct(productName, categoryName);
+            return _productRepository.SearchBook(productName, categoryName);
         }
 
-        public ViewResult AddNewProduct(bool isSuccess = false, int productId = 0)
+        public async Task<ViewResult> AddNewProduct(bool isSuccess = false, int bookId = 0)
         {
-            //var model = new ProductModel()
-            //{
-            //    Category = "Brakes"
+            var model = new ProductModel();
 
-            //};
+            ViewBag.Language = new SelectList(await _categoryRepository.GetCategories(), "Id", "Name");
+
             ViewBag.IsSuccess = isSuccess;
-            ViewBag.ProductId = productId;
-            return View();
+            ViewBag.BookId = bookId;
+            return View(model);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddNewProduct(ProductModel productModel)
@@ -56,15 +60,13 @@ namespace AvondaleTyresOnlineShop.Controllers
                 int id = await _productRepository.AddNewProduct(productModel);
                 if (id > 0)
                 {
-                    return RedirectToAction(nameof(AddNewProduct), new { isSuccess = true, product
-                        Id = id });
+                    return RedirectToAction(nameof(AddNewProduct), new { isSuccess = true, productId = id });
                 }
             }
-            ModelState.AddModelError("", "This is my custom error message");
-            ModelState.AddModelError("", "This is my second custom error message");
 
-            //ViewBag.IsSuccess = false;
-            //ViewBag.ProductId = 0;
+            ViewBag.Language = new SelectList(await _categoryRepository.GetCategories(), "Id", "Name");
+
+
             return View();
         }
     }

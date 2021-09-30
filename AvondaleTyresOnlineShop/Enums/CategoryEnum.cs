@@ -8,15 +8,15 @@ namespace AvondaleTyresOnlineShop.Enums
 {
     public enum CategoryEnum
     {
-        [Display(Name = "Hindi language")]
-        Brakes = 10,
-        [Display(Name = "English language")]
-        Tyres = 11,
-        [Display(Name = "German language")]
-        Accessories = 12,
-        [Display(Name = "Chinese language")]
-        Engine = 13,
-        [Display(Name = "Urdu language")]
-        Lights =  14
+        [Display(Name = "Brakes")]
+        Brakes = 1,
+        [Display(Name = "Tyres")]
+        Tyres = 2,
+        [Display(Name = "Accessories")]
+        Accessories = 3,
+        [Display(Name = "Engine")]
+        Engine = 4,
+        [Display(Name = "Lights")]
+        Lights =  5
     }
 }
