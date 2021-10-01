@@ -9,7 +9,7 @@ using AvondaleTyresOnlineShop.Enums;
 
 namespace AvondaleTyresOnlineShop.Repository
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly ProductStoreContext _context = null;
 
@@ -108,7 +108,7 @@ namespace AvondaleTyresOnlineShop.Repository
                  }).FirstOrDefaultAsync();
         }
 
-        public List<ProductModel> SearchBook(string item, string categoryName)
+        public List<ProductModel> SearchProduct(string item, string categoryName)
         {
             return null;
         }

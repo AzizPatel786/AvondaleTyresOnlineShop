@@ -16,12 +16,12 @@ namespace AvondaleTyresOnlineShop.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductRepository _productRepository = null;
-        private readonly CategoryRepository _categoryRepository = null;
+        private readonly IProductRepository _productRepository = null;
+        private readonly ICategoryRepository _categoryRepository = null;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(ProductRepository productRepository,
-            CategoryRepository categoryRepository,
+        public ProductController(IProductRepository productRepository,
+            ICategoryRepository categoryRepository,
             IWebHostEnvironment webHostEnvironment)
         {
             _productRepository = productRepository;
@@ -44,19 +44,19 @@ namespace AvondaleTyresOnlineShop.Controllers
 
             return View(data);
         }
-        public List<ProductModel> SearchBooks(string productName, string categoryName)
+        public List<ProductModel> SearchProducts(string productName, string categoryName)
         {
-            return _productRepository.SearchBook(productName, categoryName);
+            return _productRepository.SearchProduct(productName, categoryName);
         }
 
-        public async Task<ViewResult> AddNewProduct(bool isSuccess = false, int bookId = 0)
+        public async Task<ViewResult> AddNewProduct(bool isSuccess = false, int productId = 0)
         {
             var model = new ProductModel();
 
             ViewBag.Language = new SelectList(await _categoryRepository.GetCategories(), "Id", "Name");
 
             ViewBag.IsSuccess = isSuccess;
-            ViewBag.BookId = bookId;
+            ViewBag.ProductId = productId;
             return View(model);
         }
 

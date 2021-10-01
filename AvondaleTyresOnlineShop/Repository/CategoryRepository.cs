@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AvondaleTyresOnlineShop.Repository
 {
-    public class CategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly ProductStoreContext _context = null;
 

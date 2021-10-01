@@ -10,16 +10,16 @@ namespace AvondaleTyresOnlineShop.Components
     
         public class TopProductsViewComponent : ViewComponent
         {
-        private readonly ProductRepository _bookRepository;
+        private readonly IProductRepository _productRepository;
 
-        public TopProductsViewComponent(ProductRepository bookRepository)
+        public TopProductsViewComponent(IProductRepository productRepository)
         {
-            _bookRepository = bookRepository;
+            _productRepository = productRepository;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(int count)
         {
-            var products = await _bookRepository.GetTopProductsAsync(count);
+            var products = await _productRepository.GetTopProductsAsync(count);
             return View(products);
         }
         }
