@@ -6,16 +6,19 @@ using AvondaleTyresOnlineShop.Data;
 using AvondaleTyresOnlineShop.Models;
 using Microsoft.EntityFrameworkCore;
 using AvondaleTyresOnlineShop.Enums;
+using Microsoft.Extensions.Configuration;
 
 namespace AvondaleTyresOnlineShop.Repository
 {
     public class ProductRepository : IProductRepository
     {
         private readonly ProductStoreContext _context = null;
+        private readonly IConfiguration _configuration;
 
-        public ProductRepository(ProductStoreContext context)
+        public ProductRepository(ProductStoreContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public async Task<int> AddNewProduct(ProductModel model)
@@ -114,7 +117,7 @@ namespace AvondaleTyresOnlineShop.Repository
         }
         public string GetAppName()
         {
-            return "Product store application";
+            return _configuration["AppName"];
         }
     }
 }

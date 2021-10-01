@@ -22,6 +22,7 @@
               crossorigin="anonymous">
     </environment>
     @inject AvondaleTyresOnlineShop.Repository.IProductRepository _productRepo
+    @inject Microsoft.Extensions.Configuration.IConfiguration _configuration
 </head>
 <body>
     <header>
@@ -31,6 +32,7 @@
                     <img src="~/images/logo.png" width="30" height="30" asp-append-version="true" />
                     Avondale Tyres store
                     @*@_productRepo.GetAppName()*@
+                    @*@_configuration["AppName"]*@
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
