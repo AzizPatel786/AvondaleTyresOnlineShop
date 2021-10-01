@@ -29,6 +29,7 @@ namespace AvondaleTyresOnlineShop.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        [Route("all-products")]
         public async Task<ViewResult> GetAllProducts()
         {
             var data = await _productRepository.GetAllProducts();
@@ -36,7 +37,7 @@ namespace AvondaleTyresOnlineShop.Controllers
             return View(data);
         }
 
-        [Route("product-details/{id}", Name = "productDetailsRoute")]
+        [Route("product-details/{id:int:min(1)}", Name = "productDetailsRoute")]
         public async Task<ViewResult> GetProduct(int id)
         {
             var data = await _productRepository.GetProductById(id);

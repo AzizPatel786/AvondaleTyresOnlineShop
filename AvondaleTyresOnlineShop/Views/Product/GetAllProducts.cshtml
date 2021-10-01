@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<ProductModel>
-@using AvondaleTyresOnlineShop.Models;
 
 @{
     Layout = "_Layout";
@@ -11,22 +10,9 @@
 
         @foreach (var product in Model)
         {
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img src="@product.CoverImageUrl" class="img-thumbnail" />
-                    <div class="card-body">
-                        <h3 class="card-title">@product.Item</h3>
-                        <p class="card-text">@product.Description</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a asp-route="productDetailsRoute" asp-route-id="@product.Id"
-                                   class="btn btn-sm btn-outline-secondary">View details</a>
-                            </div>
-                            <small class="text-muted">@product.Category</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-4">
+            <partial name="_productThumbnail" model="@product" />
+        </div>
         }
 
 

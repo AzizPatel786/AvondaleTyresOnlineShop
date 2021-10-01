@@ -1,17 +1,33 @@
 ﻿@{ ViewData["Title"] = "Home"; }
 <section class="jumbotron text-center">
     <div class="container">
-        <h1>Welcome to Bookstore</h1>
+        <h1>Welcome to Avondale Tyres Online Shop</h1>
         <p class="lead text-muted">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </p>
         <p>
-            <a href="#" class="btn btn-primary my-2">Search books</a>
+            <a href="#" class="btn btn-primary my-2">Search Products</a>
         </p>
     </div>
 </section>
 
+<div class="py-5 bg-light">
+    <div class="container">
+        <h3 class="h3">HOT Selling</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <partial name="_productThumbnail" model="new ProductModel()" />
+            </div>
+            <div class="col-md-4">
+                <partial name="_productThumbnail" model="new ProductModel()" />
+            </div>
+            <div class="col-md-4">
+                <partial name="_productThumbnail" model="new ProductModel()" />
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
