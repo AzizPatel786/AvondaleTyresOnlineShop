@@ -53,7 +53,6 @@ namespace AvondaleTyresOnlineShop.Controllers
         {
             var model = new ProductModel();
 
-            ViewBag.Language = new SelectList(await _categoryRepository.GetCategories(), "Id", "Name");
 
             ViewBag.IsSuccess = isSuccess;
             ViewBag.ProductId = productId;

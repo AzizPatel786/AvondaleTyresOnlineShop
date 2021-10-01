@@ -13,5 +13,6 @@ namespace AvondaleTyresOnlineShop.Repository
         Task<ProductModel> GetProductById(int id);
         Task<List<ProductModel>> GetTopProductsAsync(int count);
         List<ProductModel> SearchProduct(string item, string categoryName);
+        string GetAppName();
     }
 }

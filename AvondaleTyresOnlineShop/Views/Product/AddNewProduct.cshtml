@@ -1,4 +1,5 @@
 ﻿@using AvondaleTyresOnlineShop.Enums
+@inject AvondaleTyresOnlineShop.Repository.ICategoryRepository _categoryRepo
 @model ProductModel
 @{
     ViewData["Item"] = "Add new product";
@@ -17,68 +18,68 @@
         </div>
     }
 
-<form method="post" enctype="multipart/form-data" asp-action="AddNewProduct" asp-controller="Product">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Item" class="control-label"></label>
-        <input asp-for="Item" class="form-control" />
-        <span asp-validation-for="Item" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CategoryId" class="control-label"></label>
-        <select asp-for="CategoryId" class="form-control" asp-items="Html.GetEnumSelectList<CategoryEnum>()">
-            <option value="">Please select the Category</option>
-        </select>
-        <span asp-validation-for="CategoryEnum" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Price" class="control-label"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Description" class="control-label"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Quantity" class="control-label"></label>
-        <input asp-for="Quantity" class="form-control" />
-        <span asp-validation-for="Quantity" class="text-danger"></span>
-
-    </div>
-    <div class="form-group">
-        <label asp-for="CoverPhoto" class="control-label"></label>
-        <div class="custom-file">
-            <input asp-for="CoverPhoto" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile">Choose file</label>
+    <form method="post" enctype="multipart/form-data" asp-action="AddNewProduct" asp-controller="Product">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Item" class="control-label"></label>
+            <input asp-for="Item" class="form-control" />
+            <span asp-validation-for="Item" class="text-danger"></span>
         </div>
-        <span asp-validation-for="CoverPhoto" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="GalleryFiles" class="control-label"></label>
-        <div class="custom-file">
-            <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile">Choose file</label>
+        <div class="form-group">
+            <label asp-for="CategoryId" class="control-label"></label>
+            <select asp-for="CategoryId" class="form-control" asp-items="(await _categoryRepo.GetCategories()).Select(x=> new SelectListItem() { Text = x.Name, Value = x.Id.ToString()})">
+                <option value="">Please select the Category</option>
+            </select>
+            <span asp-validation-for="CategoryEnum" class="text-danger"></span>
         </div>
-        <span asp-validation-for="GalleryFiles" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="PricechartPdf" class="control-label"></label>
-        <div class="custom-file">
-            <input asp-for="PricechartPdf" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
-        <span asp-validation-for="PricechartPdf" class="text-danger"></span>
-    </div>
 
-    <div class="form-group">
-        <input type="submit" value="Add product" class="btn btn-primary" />
-    </div>
-</form>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Quantity" class="control-label"></label>
+            <input asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="CoverPhoto" class="control-label"></label>
+            <div class="custom-file">
+                <input asp-for="CoverPhoto" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="GalleryFiles" class="control-label"></label>
+            <div class="custom-file">
+                <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PricechartPdf" class="control-label"></label>
+            <div class="custom-file">
+                <input asp-for="PricechartPdf" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <span asp-validation-for="PricechartPdf" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Add product" class="btn btn-primary" />
+        </div>
+    </form>
 </div> 

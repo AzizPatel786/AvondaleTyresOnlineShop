@@ -112,5 +112,9 @@ namespace AvondaleTyresOnlineShop.Repository
         {
             return null;
         }
+        public string GetAppName()
+        {
+            return "Product store application";
+        }
     }
 }
