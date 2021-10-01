@@ -67,6 +67,23 @@ namespace AvondaleTyresOnlineShop.Repository
                   }).ToListAsync();
         }
 
+        public async Task<List<ProductModel>> GetTopProductsAsync(int count)
+        {
+            return await _context.Products
+                  .Select(product => new ProductModel()
+                  {
+                      CategoryId = product.CategoryId,
+                      Category = product.Category.Name,
+                      Description = product.Description,
+                      Id = product.Id,
+                      Item = product.Item,
+                      Price = product.Price,
+                      Quantity = product.Quantity,
+                      CoverImageUrl = product.CoverImageUrl
+                  }).Take(count).ToListAsync();
+        }
+
+
         public async Task<ProductModel> GetProductById(int id)
         {
             return await _context.Products.Where(x => x.Id == id)
