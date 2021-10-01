@@ -34,7 +34,7 @@ namespace AvondaleTyresOnlineShop.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please enter the price")]
-        public int Price { get; set; }
+        public int? Price { get; set; }
 
         [Required(ErrorMessage = "Please enter the total quantity left")]
         [Display(Name = "Total amount left")]

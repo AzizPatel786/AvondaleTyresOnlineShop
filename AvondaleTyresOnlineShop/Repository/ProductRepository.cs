@@ -26,6 +26,7 @@ namespace AvondaleTyresOnlineShop.Repository
                 CreatedOn = DateTime.UtcNow,
                 Description = model.Description,
                 Item = model.Item,
+                Price = model.Price.HasValue ? model.Price.Value : 0,
                 Quantity = model.Quantity.HasValue ? model.Quantity.Value : 0,
                 UpdatedOn = DateTime.UtcNow,
                 CoverImageUrl = model.CoverImageUrl,
