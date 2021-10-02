@@ -37,7 +37,7 @@ namespace AvondaleTyresOnlineShop.Controllers
 
             //var newProduct = configuration.GetSection("NewProductAlert");
             //var result = newProduct.GetValue<bool>("DisplayNewProductAlert");
-            //var productName = newBook.GetValue<string>("ProductName");
+            //var productName = newProduct.GetValue<string>("ProductName");
 
             //var result = configuration["AppName"];
             //var key1 = configuration["infoObj:key1"];
