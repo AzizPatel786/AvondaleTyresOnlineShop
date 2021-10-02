@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AvondaleTyresOnlineShop.Models;
 
 namespace AvondaleTyresOnlineShop
 {
@@ -19,9 +20,12 @@ namespace AvondaleTyresOnlineShop
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+
+        private IConfiguration _configuration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -29,10 +33,13 @@ namespace AvondaleTyresOnlineShop
             services.AddControllersWithViews();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddSingleton<IMessageRepository, MessageRepository>();
 
+            services.Configure<NewProductAlertConfig>("InternalProduct", _configuration.GetSection("NewProductAlert"));
+            services.Configure<NewProductAlertConfig>("ThirdPartyProduct", _configuration.GetSection("ThirdPartyProduct"));
             services.AddDbContext<ProductStoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
-
+        //265
 
 
 

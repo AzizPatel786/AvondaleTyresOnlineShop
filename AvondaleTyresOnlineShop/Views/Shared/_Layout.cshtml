@@ -21,8 +21,14 @@
               integrity=""
               crossorigin="anonymous">
     </environment>
+    @using Microsoft.Extensions.Configuration
     @inject AvondaleTyresOnlineShop.Repository.IProductRepository _productRepo
     @inject Microsoft.Extensions.Configuration.IConfiguration _configuration
+    @inject Microsoft.Extensions.Options.IOptionsSnapshot<NewProductAlertConfig> _newProductAlertconfiguration
+    @{
+        var newProductAlertconfiguration = _newProductAlertconfiguration.Get("InternalProduct");
+        var thirdPartyProductAlertconfiguration = _newProductAlertconfiguration.Get("ThirdPartyProduct");
+    }
 </head>
 <body>
     <header>
@@ -58,14 +64,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Product" asp-action="getallproducts">All Products</a>
                         </li>
-                        
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Product" asp-action="AddNewProduct">Add new book</a>
+                            <a class="nav-link text-dark" asp-controller="Product" asp-action="AddNewProduct">Add new product</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        @if (newProductAlertconfiguration.DisplayNewProductAlert)
+        {
+            <div class="alert alert-info" role="alert">
+                @newProductAlertconfiguration.ProductName
+            </div>
+        }
+
+        @if (thirdPartyProductAlertconfiguration.DisplayNewProductAlert)
+        {
+            <div class="alert alert-info" role="alert">
+                @thirdPartyProductAlertconfiguration.ProductName
+            </div>
+        }
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
