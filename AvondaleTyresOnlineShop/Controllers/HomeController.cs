@@ -21,17 +21,20 @@ namespace AvondaleTyresOnlineShop.Controllers
         private readonly IMessageRepository _messageRepository;
         private readonly IConfiguration configuration;
 
-        public HomeController(ILogger<HomeController> logger, IOptionsSnapshot<NewProductAlertConfig> newProductAlertconfiguration, IMessageRepository messageRepository)
+        public HomeController(ILogger<HomeController> logger, 
+            IOptionsSnapshot<NewProductAlertConfig> newProductAlertconfiguration, 
+            IMessageRepository messageRepository)
         {
             _logger = logger;
             _newProductAlertconfiguration = newProductAlertconfiguration.Get("InternalProduct");
-            _thirdPartyProductconfiguration = newProductAlertconfiguration.Get("ThirdPartyProduct"); _messageRepository = messageRepository;
+            _thirdPartyProductconfiguration = newProductAlertconfiguration.Get("ThirdPartyProduct");
+            _messageRepository = messageRepository;
         }
 
         public ViewResult Index()
         {
-            bool isDisplay = _newProductAlertconfiguration.DisplayNewProductAlert;
-            bool isDisplay1 = _thirdPartyProductconfiguration.DisplayNewProductAlert;
+            //bool isDisplay = _newProductAlertconfiguration.DisplayNewProductAlert;
+            //bool isDisplay1 = _thirdPartyProductconfiguration.DisplayNewProductAlert;
 
            //var value = _messageRepository.GetName();
 
